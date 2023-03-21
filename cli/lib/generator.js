@@ -110,7 +110,7 @@ class Generator {
     const tag = await this.getTag(repo)
 
     // 3）下载模板到模板目录
-    await this.download(repo, tag)
+    await this.downloadGitRepo(repo, tag)
 
     // 5）模板使用提示
     console.log(`\r\nSuccessfully created project ${chalk.cyan(this.name)}`)
