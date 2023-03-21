@@ -47,7 +47,7 @@ class Generator {
 
   async getRepo () {
     // 从远程拉取模板数据
-    const repoList = await wrapLoading(getRepoList, 'waiting fetch template')
+    let repoList = await wrapLoading(getRepoList, 'waiting fetch template')
     if (!repoList) return
     // 过滤我们需要的模板名称
     const repos = repoList.map(item => item.name) // 获取模板名称

@@ -12,7 +12,7 @@ axios.interceptors.response.use(res => {
  * @returns Promise
  */
 async function getRepoList() {
-  return axios.get('https://gitee.com/xiao-jiangshan/scaffolding-learning.git')
+  return axios.get('https://github.com/hnlyxjs/testcli.git')
 }
 
 /**
@@ -21,7 +21,7 @@ async function getRepoList() {
  * @returns Promise
  */
 async function getTagList(repo) {
-  return axios.get(`https://gitee.com/xiao-jiangshan/scaffolding-learning.git/${repo}/tags`)
+  return axios.get(`https://github.com/hnlyxjs/testcli.git/${repo}/tags`)
 }
 
 module.exports = {
