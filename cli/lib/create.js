@@ -8,42 +8,49 @@ const inquirer = require('inquirer')
 // 导出Generator类
 const Generator = require('./Generator')
 
-// 1、抛出一个方法用来接收用户要创建的文件夹（项目）名和其他参数
+//1. 抛出一个方法用来接收用户要创建的文件夹(项目)名 和 其他参数
 module.exports = async function (name, options) {
-  // 当前命令行执行选择的目录
-  const cwd = process.cwd()
+  // 当前命令行选择的目录
+  const cwd  = process.cwd();
   // 需要创建的目录地址
-  const targetDir = path.join(cwd, name)
-
-  // 2、判断当前目录下是否已经存在同名文件夹（项目）
-  if(fs.existsSync(targetDir)) {
-    // 判断是否强制创建
-    if(options.force) {
-      await fs.remove(targetDir)
+  const targetAir  = path.join(cwd, name)
+  
+  //2 判断是否存在相同的文件夹(项目)名
+  // 目录是否已经存在？
+  if (fs.existsSync(targetAir)) {
+    // 是否为强制创建？
+    if (options.force) {
+      await fs.remove(targetAir)
     } else {
-      // 询问用户是否要覆盖
+      // 询问用户是否确定要覆盖
       let { action } = await inquirer.prompt([
         {
           name: 'action',
           type: 'list',
           message: 'Target directory already exists Pick an action:',
           choices: [
-            { name: 'Overwrite', value: 'overwrite' },
-            { name: 'Cancel', value: false }
+            {
+              name: 'Overwrite',
+              value: 'overwrite'
+            },{
+              name: 'Cancel',
+              value: false
+            }
           ]
         }
       ])
-      // 如果用户选择取消覆盖，终止当前命令
-      if(!action) {
-        return
-      } else if(action === 'overwrite') {
+      // 如果用户拒绝覆盖则停止剩余操作
+      if (!action) {
+        return;
+      } else if (action === 'overwrite') {
         // 移除已存在的目录
         console.log(`\r\nRemoving...`)
+        await fs.remove(targetAir)
       }
     }
   }
-  // 新建generator类
-  const generator = new Generator(name, targetDir)
-  // 执行创建项目
-  generator.create()
+
+  //3 新建generator类
+  const generator = new Generator(name, targetAir);
+  generator.create();
 }

@@ -17,7 +17,7 @@
     "commander": "^10.0.0",
     "download-git-repo": "^3.0.2",
     "fs-extra": "^11.1.0",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.5",
     "path": "^0.12.7"
   }
 }

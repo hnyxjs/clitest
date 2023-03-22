@@ -12,7 +12,7 @@ axios.interceptors.response.use(res => {
  * @returns Promise
  */
 async function getRepoList() {
-  return axios.get('https://github.com/hnlyxjs/testcli.git')
+  return axios.get('https://github.com/hnlyxjs/testcli.git/repos')
 }
 
 /**
